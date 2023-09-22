@@ -144,17 +144,45 @@ class Inventario:
         print(self.semillas_uva, " Semilas de Uva")
         print(self.semmillas_tomate, " Semillas de Tomate")
         print(self.semillas_pimiento, " Semillas de Pimiento")
+class Suelo:
+    def __init__(self, tiene_agua, tiene_fertilizante, tiene_plaga, tiene_semilla):
+        self.tiene_agua = tiene_agua
+        self.tiene_fertilizante = tiene_fertilizante
+        self.tiene_plaga = tiene_plaga
+        self.tiene_semilla = tiene_semilla
+
+    def fertilizar(self):
+        self.tiene_fertilizante = True
+
+    def relentizar_proceso(self):
+        self.tiene_plaga = True
+
+    def Parar_Proceso(self):
+        self.tiene_agua = False
+    def Mostrar_Datos(self):
+        print("¿Tiene agua el suelo? ", self.tiene_agua)
+        print("¿Tiene fertilizante el suelo? ", self.tiene_fertilizante)
+        print("¿Tiene plaga el suelo? ", self.tiene_plaga)
+        print("¿Tiene semilla el suelo? ", self.tiene_semilla)
+
+    def Verificar_Suelos_Disponibles(self):
+
 
 
 opcion = 1
 listaSemillas = []
-
+listaSuelos = []
 listaSemillas.append(Semilla_Tomate(False, False, False))
 listaSemillas.append(Semilla_Uva(False, False, False))
 listaSemillas.append(Semilla_Pimiento(False, False, False))
 listaSemillas.append(Semilla_Pera(False, False, False))
 listaSemillas.append(Semilla_Manzana(False, False, False))
 inventario = Inventario(1,1,1,1,1)
+listaSuelos.append(Suelo(False, False, False, False))
+listaSuelos.append(Suelo(False, False, False, False))
+listaSuelos.append(Suelo(False, False, False, False))
+listaSuelos.append(Suelo(False, False, False, False))
+listaSuelos.append(Suelo(False, False, False, False))
 
 while opcion != 0:
     print("Bienvenido a Farm Simulator, presione cualquier tecla y enter para continuar: ")
@@ -179,13 +207,27 @@ while opcion != 0:
             if opcion_cosechas == 1:
                 opcion_siembra = 1
                 while opcion_siembra != 0:
-                    print("Tienes: ", terreno.espacio_siembra, " espacios para sembrar.")
-                    print("¿Que deseas sembrar? ")
-                    print("1. Semillas de Manzana")
-                    print("2. Semillas de Pera")
-                    print("3. Semillas de Uva")
-                    print("4. Semillas de Pimiento")
-                    print("5. Semillas de Tomate")
+                    if terreno.espacio_siembra == 0:
+                        print("Ya no tienes más espacios para sembrar")
+                        print("Cultiva o mejora el terreno para sembrar más")
+                    else:
+                        print("Tienes: ", terreno.espacio_siembra, " espacios para sembrar.")
+                        print("¿Que deseas sembrar? ")
+                        print("1. Semillas de Manzana")
+                        print("2. Semillas de Pera")
+                        print("3. Semillas de Uva")
+                        print("4. Semillas de Pimiento")
+                        print("5. Semillas de Tomate")
+                        opcion_siembra = int(input(""))
+                        if opcion_siembra == 1:
+                            if inventario.semillas_manzana == 0:
+                                print("No tienes semillas de manzana")
+                            else:
+
+                                print("Semilla sembrada!")
+
+
+
 
 
 
