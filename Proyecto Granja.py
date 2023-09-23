@@ -106,6 +106,20 @@ class Terreno:
         self.nivel = nivel
         self.precio = precio
 
+    def Verificar_Suelos_Disponibles(self):
+        for i in range(0, len(listaSuelos)):
+            if listaSuelos[i].tiene_semilla == True:
+                print("Suelo: ", listaSuelos[i].Get_Numero(), " no disponible")
+            else:
+                print("Suelo: ", listaSuelos[i].Get_Numero(), " disponible")
+    def Actualizar(self):
+        contador_espacios = 5
+        for i in range(0, len(listaSuelos)):
+            if  listaSuelos[i].tiene_semilla == True:
+                contador_espacios = contador_espacios - 1
+            else:
+                continue
+        self.espacio_siembra = contador_espacios
 class Inventario:
     def __init__(self, semillas_manzana, semillas_pera, semillas_uva, semillas_pimiento, semmillas_tomate):
         self.semillas_manzana = semillas_manzana
@@ -144,12 +158,15 @@ class Inventario:
         print(self.semillas_uva, " Semilas de Uva")
         print(self.semmillas_tomate, " Semillas de Tomate")
         print(self.semillas_pimiento, " Semillas de Pimiento")
+
 class Suelo:
-    def __init__(self, tiene_agua, tiene_fertilizante, tiene_plaga, tiene_semilla):
+    def __init__(self, tiene_agua, tiene_fertilizante, tiene_plaga, tiene_semilla, _numero, semilla):
         self.tiene_agua = tiene_agua
         self.tiene_fertilizante = tiene_fertilizante
         self.tiene_plaga = tiene_plaga
         self.tiene_semilla = tiene_semilla
+        self._numero = _numero
+        self.semilla = semilla
 
     def fertilizar(self):
         self.tiene_fertilizante = True
@@ -165,9 +182,22 @@ class Suelo:
         print("¿Tiene plaga el suelo? ", self.tiene_plaga)
         print("¿Tiene semilla el suelo? ", self.tiene_semilla)
 
-    def Verificar_Suelos_Disponibles(self):
+    def Get_Numero(self):
+        return self._numero
+    def Agregar_Semilla(self, Nombre_de_semilla):
+        self.semilla = Nombre_de_semilla
 
+def Sembrar(Nombre_Semilla, Nombre_Informal_Semilla):
+    print("¿En que suelo deseas sembrarlo? ")
+    terreno.Verificar_Suelos_Disponibles()
+    opcion_suelo = int(input("Ingrese el numero del suelo que deseas: "))
+    listaSuelos[opcion_suelo].tiene_semilla = True
+    listaSuelos[opcion_suelo].Agregar_Semilla(Nombre_Informal_Semilla)
+    inventario.Eliminar_Semilla(Nombre_Semilla)
+    terreno.Actualizar()
 
+    print(Nombre_Semilla, " sembrada en suelo ", listaSuelos[opcion_suelo].Get_Numero())
+    print(inventario.Mostrar_Semillas())
 
 opcion = 1
 listaSemillas = []
@@ -178,16 +208,15 @@ listaSemillas.append(Semilla_Pimiento(False, False, False))
 listaSemillas.append(Semilla_Pera(False, False, False))
 listaSemillas.append(Semilla_Manzana(False, False, False))
 inventario = Inventario(1,1,1,1,1)
-listaSuelos.append(Suelo(False, False, False, False))
-listaSuelos.append(Suelo(False, False, False, False))
-listaSuelos.append(Suelo(False, False, False, False))
-listaSuelos.append(Suelo(False, False, False, False))
-listaSuelos.append(Suelo(False, False, False, False))
-
+listaSuelos.append(Suelo(False, False, False, False, 0, "No tiene semilla"))
+listaSuelos.append(Suelo(False, False, False, False, 1, "No tiene semilla"))
+listaSuelos.append(Suelo(False, False, False, False, 2 , "No tiene semilla"))
+listaSuelos.append(Suelo(False, False, False, False, 3, "No tiene semilla"))
+listaSuelos.append(Suelo(False, False, False, False, 4, "No tiene semilla"))
+terreno = Terreno(5, 1, 1000)
 while opcion != 0:
-    print("Bienvenido a Farm Simulator, presione cualquier tecla y enter para continuar: ")
-    terreno = Terreno(5, 1, 1000)
-    input()
+    print("Bienvenido a Farm Simulator! ")
+    print("Selecciona la opción que deseas: ")
     print("1. Cultivos y cosechas")
     print("2. Cuidado de animales")
     print("3. Economía y comercio")
@@ -218,18 +247,48 @@ while opcion != 0:
                         print("3. Semillas de Uva")
                         print("4. Semillas de Pimiento")
                         print("5. Semillas de Tomate")
+                        print("0. Salir")
                         opcion_siembra = int(input(""))
                         if opcion_siembra == 1:
                             if inventario.semillas_manzana == 0:
                                 print("No tienes semillas de manzana")
                             else:
+                                Sembrar("Semilla_Manzana", "Semilla de Manzana")
+                        elif opcion_siembra == 2:
+                            if inventario.semillas_pera == 0:
+                                print("No tienes semillas de pera")
+                            else:
+                                Sembrar("Semilla_Pera", "Semilla de Pera")
+                        elif opcion_siembra == 3:
+                            if inventario.semillas_uva == 0:
+                                print("No tienes semillas de uva")
+                            else:
+                                Sembrar("Semilla_Uva", "Semilla de Uva")
+                        elif opcion_siembra == 4:
+                            if inventario.semillas_pimiento == 0:
+                                print("No tienes semillas de pimiento")
+                            else:
+                                Sembrar("Semilla_Pimiento", "Semilla de pimiento")
+                        elif opcion_siembra == 5:
+                            if inventario.semmillas_tomate == 0:
+                                print("No tienes semillas de tomate")
+                            else:
+                                Sembrar("Semilla_Tomate", "Semilla de Tomate")
+            elif opcion_cosechas == 2:
+                
+                decision = "S"
+                while decision == "S" or decision == "s":
+                    for i in range(0 , len(listaSuelos)):
+                        print("Suelo: ", listaSuelos[i].Get_Numero() ," , ", listaSuelos[i].semilla)
+                    opcion_suelo = int(input("Ingrese el numero del suelo que desea regar: "))
+                    listaSuelos[opcion_suelo].tiene_agua = True
+                    decision = input("¿Desea regar otra semilla? (S/N): ")
 
-                                print("Semilla sembrada!")
 
 
-
-
-
+            elif opcion_cosechas == 4:
+                print("Bienvenido al inventario")
+                inventario.Mostrar_Semillas()
 
 
     elif opcion == 2:
@@ -238,5 +297,7 @@ while opcion != 0:
         print("Bienvenido al espacio de economía y comercio")
     elif opcion == 4:
         print("Bienvenido al inventario")
+        inventario.Mostrar_Semillas()
+
 
 
