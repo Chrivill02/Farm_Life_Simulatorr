@@ -27,22 +27,40 @@
 #Corregir errores
 
 class Hortaliza:
-    def __init__(self,nombre, precio, aspecto, puntos_salud,semillas ):
+    def __init__(self,nombre, precio, puntos_salud,semillas ):
         self.nombre = nombre
         self.precio = precio
-        self.aspecto = aspecto
         self.puntos_salud = puntos_salud
         self.semillas = semillas
 
     def mostrar_datos(self):
         print("Precio: ", self.precio)
-        print("Aspecto: ", self.aspecto)
         print("Puntos de salud: ", self.puntos_salud)
         print("Semillas: ", self.semillas)
 
+    def Dar_Semillas(self):
+        return self.semillas
+class Manzana(Hortaliza):
+    def __init__(self, nombre = "Manzana", precio = 25, puntos_salud = 10, semillas = 3):
+        super().__init__(nombre, precio, puntos_salud, semillas)
+class Pera(Hortaliza):
+    def __init__(self, nombre = "Pera", precio = 30, puntos_salud = 15, semillas = 3):
+        super().__init__(nombre, precio, puntos_salud, semillas)
+
+class Uva(Hortaliza):
+    def __init__(self, nombre = "Uva", precio = 50, puntos_salud = 25, semillas = 2):
+        super().__init__(nombre, precio, puntos_salud, semillas)
+
+class Pimiento(Hortaliza):
+    def __init__(self, nombre = "Pimiento", precio = 15, puntos_salud = 5, semillas = 5):
+        super().__init__(nombre, precio, puntos_salud, semillas)
+
+class Tomate(Hortaliza):
+    def __init__(self, nombre = "Tomate", precio = 10, puntos_salud = 5, semillas = 4):
+        super().__init__(nombre, precio, puntos_salud, semillas)
 class Semilla:
     def __init__(self, es_brote = False, es_crecimiento = False, es_madura = False, tiene_agua = False
-                 , tiene_fertilizante = False, tiene_plaga = False, hora_semilla = False):
+                 , tiene_fertilizante = False, tiene_plaga = False, dia_semilla = 0):
 
         self.precio = 0
         self.es_brote = es_brote
@@ -51,7 +69,7 @@ class Semilla:
         self.tiene_agua = tiene_agua
         self.tiene_fertilizante = tiene_fertilizante
         self.tiene_plaga = tiene_plaga
-        self.hora_semilla = hora_semilla
+        self.dia_semilla = dia_semilla
 
     def Mostrar_Datos(self):
         print("Nombre: ", "")
@@ -59,28 +77,25 @@ class Semilla:
         print("Tiene agua: ", self.tiene_agua)
 
     def Crecer(self):
-        if self.es_brote == True:
-            self.es_crecimiento = True
-            self.es_brote = False
-            print("Su semilla está en floracion")
-        elif self.es_crecimiento == True:
-            self.es_madura = True
-            self.es_crecimiento = False
-            print("Su semilla está madura, lista para cosechar ")
+        self.es_crecimiento = True
+        self.es_brote = False
+        print("Su semilla está en floracion")
+
 
     def Madurar(self):
         self.es_madura = True
         self.es_crecimiento = False
-
+        print("Su semilla está madura, lista para cosechar")
 
 
 
 class Semilla_Manzana(Semilla):
     def __init__(self,  es_brote = False, es_crecimiento = False, es_madura = False, tiene_agua = False
-                 , tiene_fertilizante = False, tiene_plaga = False, hora_semilla = 0):
-        super().__init__(  es_brote, es_crecimiento, es_madura, tiene_agua, tiene_fertilizante, tiene_plaga, hora_semilla)
+                 , tiene_fertilizante = False, tiene_plaga = False, dia_semilla = 0):
+        super().__init__(  es_brote, es_crecimiento, es_madura, tiene_agua, tiene_fertilizante, tiene_plaga, dia_semilla)
         self.nombre_backend = "Semilla_Manzana"
         self.nombre_informal = "Semilla de Manzana"
+        self.nombre_madura = "Manzana"
         self.precio = 10
 
     def Mostrar_Datos(self):
@@ -92,10 +107,11 @@ class Semilla_Manzana(Semilla):
 
 class Semilla_Pera(Semilla):
     def __init__(self,  es_brote = False, es_crecimiento = False, es_madura = False, tiene_agua = False,
-                 tiene_fertilizante = False, tiene_plaga = False, hora_semilla = 0):
-        super().__init__( es_brote, es_crecimiento, es_madura,tiene_agua, tiene_fertilizante, tiene_plaga , hora_semilla)
+                 tiene_fertilizante = False, tiene_plaga = False, dia_semilla = 0):
+        super().__init__( es_brote, es_crecimiento, es_madura,tiene_agua, tiene_fertilizante, tiene_plaga , dia_semilla)
         self.nombre_backend = "Semilla_Pera"
         self.nombre_informal = "Semilla de Pera"
+        self.nombre_madura = "Pera"
         self.precio = 8
 
 
@@ -106,10 +122,11 @@ class Semilla_Pera(Semilla):
 
 class Semilla_Tomate(Semilla):
     def __init__(self, es_brote = False, es_crecimiento = False, es_madura = False, tiene_agua = False,
-                 tiene_fertilizante = False, tiene_plaga = False, hora_semilla = 0):
-        super().__init__(  es_brote, es_crecimiento, es_madura, tiene_agua, tiene_fertilizante, tiene_plaga, hora_semilla)
+                 tiene_fertilizante = False, tiene_plaga = False, dia_semilla = 0):
+        super().__init__(  es_brote, es_crecimiento, es_madura, tiene_agua, tiene_fertilizante, tiene_plaga, dia_semilla)
         self.nombre_backend = "Semilla_Tomate"
         self.nombre_informal = "Semilla de Tomate"
+        self.nombre_madura = "Tomate"
         self.precio = 5
 
     def Mostrar_Datos(self):
@@ -118,12 +135,15 @@ class Semilla_Tomate(Semilla):
         print("Tiene agua: ", self.tiene_agua)
 
 
+
+
 class Semilla_Pimiento(Semilla):
     def __init__(self,  es_brote = False, es_crecimiento = False, es_madura = False, tiene_agua = False,
-                 tiene_fertilizante = False, tiene_plaga = False, hora_semilla = 0):
-        super().__init__(  es_brote, es_crecimiento, es_madura, tiene_agua, tiene_fertilizante, tiene_plaga , hora_semilla)
+                 tiene_fertilizante = False, tiene_plaga = False, dia_semilla = 0):
+        super().__init__(  es_brote, es_crecimiento, es_madura, tiene_agua, tiene_fertilizante, tiene_plaga , dia_semilla)
         self.nombre_backend = "Semilla_Pimiento"
         self.nombre_informal = "Semilla de Pimiento"
+        self.nombre_madura = "Pimiento"
         self.precio = 4
 
     def Mostrar_Datos(self):
@@ -133,10 +153,11 @@ class Semilla_Pimiento(Semilla):
 
 class Semilla_Uva(Semilla):
     def __init__(self ,es_brote = False, es_crecimiento = False, es_madura = False,  tiene_agua = False,
-                 tiene_fertilizante = False, tiene_plaga = False, hora_semilla = 0):
-        super().__init__(  es_brote, es_crecimiento, es_madura,  tiene_agua, tiene_fertilizante, tiene_plaga, hora_semilla)
+                 tiene_fertilizante = False, tiene_plaga = False, dia_semilla = 0):
+        super().__init__(  es_brote, es_crecimiento, es_madura,  tiene_agua, tiene_fertilizante, tiene_plaga, dia_semilla)
         self.nombre_backend = "Semilla_Uva"
         self.nombre_informal = "Semilla de Uva"
+        self.nombre_madura = "Uva"
         self.precio = 10
 
     def Mostrar_Datos(self):
@@ -164,24 +185,30 @@ class Terreno:
                 continue
         self.espacio_siembra = contador_espacios
 class Inventario:
-    def __init__(self, semillas_manzana, semillas_pera, semillas_uva, semillas_pimiento, semmillas_tomate):
+    def __init__(self, semillas_manzana, semillas_pera, semillas_uva, semillas_pimiento, semillas_tomate,
+                 manzanas = 0, peras = 0, uvas = 0, pimientos = 0, tomates = 0):
         self.semillas_manzana = semillas_manzana
         self.semillas_pera = semillas_pera
         self.semillas_uva = semillas_uva
         self.semillas_pimiento = semillas_pimiento
-        self.semmillas_tomate = semmillas_tomate
+        self.semillas_tomate = semillas_tomate
+        self.manzanas = manzanas
+        self.peras = peras
+        self.uvas = uvas
+        self.pimientos = pimientos
+        self.tomates = tomates
 
-    def Agregar_Semilla(self,Nombre_Semilla):
+    def Agregar_Semilla(self,Nombre_Semilla, numero_semillas):
         if Nombre_Semilla == "Semilla_Manzana":
-            self.semillas_manzana = self.semillas_manzana + 1
+            self.semillas_manzana = self.semillas_manzana + numero_semillas
         elif Nombre_Semilla == "Semilla_Pera":
-            self.semillas_pera = self.semillas_pera + 1
+            self.semillas_pera = self.semillas_pera + numero_semillas
         elif Nombre_Semilla == "Semilla_Uva":
-            self.semillas_uva = self.semillas_uva + 1
+            self.semillas_uva = self.semillas_uva + numero_semillas
         elif Nombre_Semilla == "Semilla_Pimiento":
-            self.semillas_pimiento = self.semillas_pimiento + 1
+            self.semillas_pimiento = self.semillas_pimiento + numero_semillas
         elif Nombre_Semilla == "Semilla_Tomate":
-            self.semmillas_tomate = self.semmillas_tomate + 1
+            self.semillas_tomate = self.semillas_tomate + numero_semillas
 
     def Eliminar_Semilla(self, Nombre_Semilla):
         if Nombre_Semilla == "Semilla_Manzana":
@@ -193,25 +220,51 @@ class Inventario:
         elif Nombre_Semilla == "Semilla_Pimiento":
             self.semillas_pimiento = self.semillas_pimiento - 1
         elif Nombre_Semilla == "Semilla_Tomate":
-            self.semmillas_tomate = self.semmillas_tomate - 1
+            self.semillas_tomate = self.semillas_tomate - 1
+
+    def Agregar_Hortalizas(self,Hortaliza):
+        if Hortaliza == "Manzana":
+            self.manzanas = self.manzanas + 1
+        elif Hortaliza == "Pera":
+            self.peras = self.peras + 1
+        elif Hortaliza == "Uva":
+            self.uvas = self.uvas + 1
+        elif Hortaliza == "Pimiento":
+            self.pimientos = self.pimientos + 1
+        elif Hortaliza == "Tomate":
+            self.tomates = self.tomates + 1
+
+    def Eliminar_Hortaliza(self, Hortaliza):
+        if Hortaliza == "Manzana":
+            self.manzanas = self.manzanas - 1
+        elif Hortaliza == "Pera":
+            self.peras = self.peras - 1
+        elif Hortaliza == "Uva":
+            self.uvas = self.uvas - 1
+        elif Hortaliza == "Pimiento":
+            self.pimientos = self.pimientos - 1
+        elif Hortaliza == "Tomate":
+            self.tomates = self.tomates - 1
 
     def Mostrar_Semillas(self):
         print(self.semillas_manzana, " Semillas de Manzana")
         print(self.semillas_pera, " Semillas de Pera")
         print(self.semillas_uva, " Semilas de Uva")
-        print(self.semmillas_tomate, " Semillas de Tomate")
+        print(self.semillas_tomate, " Semillas de Tomate")
         print(self.semillas_pimiento, " Semillas de Pimiento")
 
 
 
 class Suelo:
-    def __init__(self, tiene_semilla, _numero, semilla = "No tiene semilla", numero_semilla = 10, tiene_agua = False, hora_semilla = 0):
+    def __init__(self, tiene_semilla, _numero, semilla = "No tiene semilla", numero_semilla = 10, tiene_agua = False,
+                 dia_semilla = 0, hortaliza = "No hay hortaliza"):
         self.tiene_semilla = tiene_semilla
         self._numero = _numero
         self.semilla = semilla
         self.numero_semilla = numero_semilla
         self.tiene_agua = tiene_agua
-        self.hora_semilla = hora_semilla
+        self.dia_semilla = dia_semilla
+        self.hortaliza = hortaliza
     def fertilizar(self):
         self.tiene_fertilizante = True
 
@@ -230,6 +283,8 @@ class Suelo:
     def Agregar_Semilla(self, Nombre_de_semilla):
         self.semilla = Nombre_de_semilla
 
+    def Agregar_Hortaliza(self, Hortaliza):
+        self.hortaliza = Hortaliza
     def Get_Numero(self):
         return self._numero
 
@@ -263,7 +318,7 @@ class Calendario:
                 if self.dia > 30:  # Puedes ajustar esto según el número de días en tu juego
                     self.dia = 1
                     self.cambiar_estacion()
-                    if self.mes == 12:
+                    if self.mes >= 12:
                         self.mes = 0
 
     def cambiar_estacion(self):
@@ -279,24 +334,56 @@ class Calendario:
 
 
 
-def Sembrar(Nombre_Semilla, Nombre_Informal_Semilla, index_Semilla):
+def Sembrar(Nombre_Semilla, Nombre_Informal_Semilla, index_Semilla, hortaliza):
     print("¿En que suelo deseas sembrarlo? ")
     terreno.Verificar_Suelos_Disponibles()
     opcion_suelo = int(input("Ingrese el numero del suelo que deseas: "))
     listaSuelos[opcion_suelo].tiene_semilla = True
     listaSuelos[opcion_suelo].Agregar_Semilla(Nombre_Informal_Semilla)
+    listaSuelos[opcion_suelo].Agregar_Hortaliza(hortaliza)
     listaSuelos[opcion_suelo].numero_semilla = index_Semilla
     listaSemillas[index_Semilla].nombre_informal = ""
+    listaSemillas[index_Semilla].es_brote = True
+    listaSemillas[index_Semilla].dia_semilla = calendario.dia
     inventario.Eliminar_Semilla(Nombre_Semilla)
     terreno.Actualizar()
 
     print(Nombre_Informal_Semilla, " sembrada en suelo ", listaSuelos[opcion_suelo].Get_Numero())
 
-#Por aca voy, ya muestra el tiempo, solo falta el if para usar el metodo Crecer
+
 def Actualizar():
      for i in range(0, len(listaSuelos)):
         if listaSuelos[i].tiene_agua == True:
-            print(listaSemillas[listaSuelos[i].numero_semilla].hora_semilla)
+            print(listaSemillas[listaSuelos[i].numero_semilla].dia_semilla)
+            print(calendario.dia)
+            if listaSemillas[listaSuelos[i].numero_semilla].dia_semilla + 1 == calendario.dia and listaSemillas[listaSuelos[i].numero_semilla].es_crecimiento == False:
+                listaSemillas[listaSuelos[i].numero_semilla].Crecer()
+            elif listaSemillas[listaSuelos[i].numero_semilla].dia_semilla + 2 == calendario.dia and listaSemillas[listaSuelos[i].numero_semilla].es_madura == False:
+                listaSemillas[listaSuelos[i].numero_semilla].Madurar()
+
+
+#Aca voy
+def Cosechar(hortaliza):
+    if hortaliza == "Manzana":
+        listaHortalizas.append(Manzana)
+        inventario.Agregar_Semilla("Semilla_Manzana", manzana.Dar_Semillas())
+    elif hortaliza == "Pera":
+        listaHortalizas.append(Pera)
+        inventario.Agregar_Semilla("Semilla_Pera", pera.Dar_Semillas())
+    elif hortaliza == "Uva":
+        listaHortalizas.append(Uva)
+        inventario.Agregar_Semilla("Semilla_Uva", uva.Dar_Semillas())
+    elif hortaliza == "Pimiento":
+        listaHortalizas.append(Pimiento)
+        inventario.Agregar_Semilla("Semilla_Pimiento", pimiento.Dar_Semillas())
+    elif hortaliza == "Tomate":
+        listaHortalizas.append(Tomate)
+        inventario.Agregar_Semilla("Semilla_Tomate", tomate.Dar_Semillas())
+    inventario.Agregar_Hortalizas(hortaliza)
+    
+
+
+
 
 
 # Uso de ejemplo
@@ -306,6 +393,12 @@ calendario = Calendario()
 opcion = 1
 listaSemillas = []
 listaSuelos = []
+listaHortalizas = []
+manzana = Manzana()
+pera = Pera()
+uva = Uva()
+pimiento = Pimiento()
+tomate = Tomate()
 listaSemillas.append(Semilla_Tomate())
 listaSemillas.append(Semilla_Uva())
 listaSemillas.append(Semilla_Pimiento())
@@ -365,43 +458,8 @@ while opcion != 0:
                         print(i, ". ", listaSemillas[i].nombre_informal)
                     opcion_siembra = int(input(""))
                     Sembrar(listaSemillas[opcion_siembra].nombre_backend,listaSemillas[opcion_siembra].nombre_informal
-                            , opcion_siembra)
+                            , opcion_siembra, listaSemillas[opcion_siembra].nombre_madura)
 
-                    """if opcion_siembra == 1:
-                        calendario.avanzar_tiempo(10)
-                        calendario.mostrar_fecha_hora()
-                        if inventario.semillas_manzana == 0:
-                            print("No tienes semillas de manzana")
-                        else:
-                            Sembrar("Semilla_Manzana", "Semilla de Manzana", 1)
-                    elif opcion_siembra == 2:
-                        calendario.avanzar_tiempo(10)
-                        calendario.mostrar_fecha_hora()
-                        if inventario.semillas_pera == 0:
-                            print("No tienes semillas de pera")
-                        else:
-                            Sembrar("Semilla_Pera", "Semilla de Pera",2 )
-                    elif opcion_siembra == 3:
-                        calendario.avanzar_tiempo(10)
-                        calendario.mostrar_fecha_hora()
-                        if inventario.semillas_uva == 0:
-                            print("No tienes semillas de uva")
-                        else:
-                            Sembrar("Semilla_Uva", "Semilla de Uva", 3)
-                    elif opcion_siembra == 4:
-                        calendario.avanzar_tiempo(10)
-                        calendario.mostrar_fecha_hora()
-                        if inventario.semillas_pimiento == 0:
-                            print("No tienes semillas de pimiento")
-                        else:
-                            Sembrar("Semilla_Pimiento", "Semilla de pimiento", 4)
-                    elif opcion_siembra == 5:
-                        calendario.avanzar_tiempo(10)
-                        calendario.mostrar_fecha_hora()
-                        if inventario.semmillas_tomate == 0:
-                            print("No tienes semillas de tomate")
-                        else:
-                            Sembrar("Semilla_Tomate", "Semilla de Tomate", 5)"""
             elif opcion_cosechas == 2:
                 Actualizar()
                 calendario.avanzar_tiempo(60)
@@ -416,12 +474,27 @@ while opcion != 0:
                     else:
                         listaSemillas[listaSuelos[opcion_suelo].numero_semilla].tiene_agua = True
                         listaSemillas[listaSuelos[opcion_suelo].numero_semilla].Mostrar_Datos()
-                        listaSemillas[listaSuelos[opcion_suelo].numero_semilla].hora_semilla = calendario.hora
-                        listaSuelos[opcion_suelo].hora_semilla = calendario.hora
+                        listaSemillas[listaSuelos[opcion_suelo].numero_semilla].dia_semilla = calendario.dia
+                        listaSuelos[opcion_suelo].dia_semilla = calendario.dia
                         listaSuelos[opcion_suelo].tiene_agua = True
                         decision = input("¿Desea regar otra semilla? (S/N): ")
 
+            elif opcion_cosechas == 3:
+                for i in range(0 , len(listaSuelos)):
+                    print("Suelo: ", listaSuelos[i].Get_Numero() ," , ", listaSuelos[i].hortaliza)
+                    if listaSuelos[i].tiene_semilla == True:
+                        if listaSemillas[listaSuelos[i].numero_semilla].es_madura == True:
+                            print("Maduro(a)")
+                        else:
+                            print("No maduro")
 
+                    else:
+                        print("No hay semilla")
+                opcion_suelo = int(input("Ingrese el numero del suelo para cosechar su hortaliza: "))
+                if listaSemillas[listaSuelos[opcion_suelo].numero_semilla].es_madura == True:
+                    Cosechar(listaSemillas[listaSuelos[opcion_suelo].numero_semilla].nombre_madura)
+                else:
+                    print("No hay una hortaliza madura en este suelo")
 
 
             elif opcion_cosechas == 4:
