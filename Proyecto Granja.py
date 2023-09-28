@@ -20,9 +20,10 @@ class Animal:
         self.salud=100
         self.hambre=0
         self.felicidad=100
+        self.cantidad_animales=2
 
     def MostrarDatos(self):
-        print(f'Datos:\nSalud: {self.salud}\nHambre: {self.hambre}\nFelicidad: {self.felicidad}\nProducción: {self.produccion}')
+        print(f'Datos:\nSalud: {self.salud}\nHambre: {self.hambre}\nFelicidad: {self.felicidad}\nRecursos: {self.produccion}\nCantidad de animales: {cantidad_animales}')
     def AlimentarAnimal(self, cantidad):
         self.hambre -= cantidad
         self.felicidad += cantidad
@@ -49,6 +50,12 @@ class Animal:
         def VenderLana(self):
             self.lana -=15
 
+        def AgregarOveja(self, cantidad):
+            self.cantidad_animales+=cantidad
+
+        def EliminarOveja(self, cantidad):
+            self.cantidad_animales -= cantidad
+
         def MostrarProduccion(self):
             print(f'La producción de LANA es de: {self.lana}')
     class Gallina(Animal):
@@ -62,6 +69,11 @@ class Animal:
         def VenderHuevos(self):
             self.huevos-=5
 
+        def AgregarGallina(self, cantidad):
+            self.cantidad_animales+=cantidad
+
+        def EliminarGallina(self, cantidad):
+            self.cantidad_animales-=cantidad
         def MostrarProduccion(self):
             print(f'La producción de HUEVOS es de: {self.huevos}')
     class Vaca(Animal):
@@ -75,6 +87,11 @@ class Animal:
         def VenderLeche(self):
             self.leche -=15
 
+        def AgregarVaca(self, cantidad):
+            self.cantidad_animales+=cantidad
+
+        def EliminarVaca(self, cantidad):
+            self.cantidad_animales -= cantidad
         def MostrarProduccion(self):
             print(f'La producción de LECHE es de: {self.leche}')
 
