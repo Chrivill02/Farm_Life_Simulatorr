@@ -22,12 +22,15 @@ class Animal:
         self.felicidad=100
         self.cantidad_animales=2
         self.enfermo=False
+        self.cantidad_enfermos=0
+        self.comida=5
 
     def MostrarDatos(self):
         print(f'Datos:\nSalud: {self.salud}\nHambre: {self.hambre}\nFelicidad: {self.felicidad}\nRecursos: {self.produccion}\nCantidad de animales: {cantidad_animales}')
     def AlimentarAnimal(self, cantidad):
         self.hambre -= cantidad
         self.felicidad += cantidad
+        self.comida -= cantidad
 
     def Acariciar(self):
         self.felicidad +=10
@@ -36,14 +39,18 @@ class Animal:
         self.salud +=10
 
     def Enfermar(self):
-        self.salud-=20
+        if self.enfermo==True:
+        self.salud-=20*self.cantidad_enfemos
 
     def Curar(self):
         self.salud +=30
 
+    def AgregarComida(self, cantidad):
+        self.comida+=cantidad
+
 class Oveja(Animal):
-        def __init__(self, salud, hambre, felicidad):
-            super().__init__(salud, hambre, felicidad)
+        def __init__(self, salud, hambre, felicidad, enfermo, comida, cantidad_enfermos, cantidad_animales):
+            super().__init__(salud, hambre, felicidad, enfermo,comida, cantidad_enfermos, cantidad_animales)
             self.tipo = "oveja"
             self.lana=0
 
@@ -64,8 +71,8 @@ class Oveja(Animal):
         def MostrarProduccion(self):
             print(f'La producción de LANA es de: {self.lana}')
 class Gallina(Animal):
-        def __init__(self, salud, hambre, felicidad):
-            super().__init__(salud, hambre, felicidad)
+        def __init__(self, salud, hambre, felicidad, enfermo, comida, cantidad_enfermos, cantidad_animales):
+            super().__init__(salud, hambre, felicidad, enfermo, comida, cantidad_enfermos, cantidad_animales)
             self.tipo = "gallina"
             self.huevos=0
 
@@ -86,8 +93,8 @@ class Gallina(Animal):
         def MostrarProduccion(self):
             print(f'La producción de HUEVOS es de: {self.huevos}')
 class Vaca(Animal):
-        def __init__(self, salud, hambre, felicidad):
-            super().__init__(salud, hambre, felicidad)
+        def __init__(self, salud, hambre, felicidad,  enfermo, comida, cantidad_enfermos, cantidad_animales):
+            super().__init__(salud, hambre, felicidad, enfermo, comida, cantidad_enfermos, cantidad_animales)
             self.tipo = "vaca"
             self.leche=0
 
@@ -109,9 +116,10 @@ class Vaca(Animal):
             print(f'La producción de LECHE es de: {self.leche}')
 
 
-class Enfermedades:
-    def __init__(self, ListaEnfermos):
-        self.ListaEnfermos=ListaEnfermos
+class Enfermos:
+    def __init__(self):
+        ListaEnfermos=[]
+        self.ListaEnfermos=ListaEnfermos.append(Animal.Enfermar())
 
 class Granja(Oveja, Gallina, Vaca):
     def __init__(self, tipo, salud, hambre, felicidad):
@@ -124,26 +132,133 @@ class Granja(Oveja, Gallina, Vaca):
         print(f'RECURSOS:\nLeche: {self.leche}\nHuevos: {self.huevos}\nLana: {self.lana}')
 
 
-
-
+Mi_animal=Animal()
 
 while opcion != 0:
+    Actualizar()
+    calendario.avanzar_tiempo(60)
+    calendario.mostrar_fecha_hora()
+      # Avanza el tiempo en minutos (ajusta según tus necesidades)while opcion != 0:
     print("Bienvenido a Farm Simulator! ")
-    print("Selecciona el número de la opción que deseas: ")
+    print("Selecciona la opción que deseas: ")
     print("1. Cultivos y cosechas")
     print("2. Cuidado de animales")
     print("3. Economía y comercio")
     print("4. Ver inventario")
     print("0. Salir")
-    opcion = int(input())
-
-    if opcion == 1:
+    opcion = int(input(""))
+    if opcion == 2:
         Actualizar()
         calendario.avanzar_tiempo(60)
         calendario.mostrar_fecha_hora()
-        Animal.MostrarDatos()
-        print("Seleccione el número de la opción que desea consultar")
-        print("1. ")
+
+        opcion_animales = 1
+        while opcion_animales != 0:
+            print("¡Bienvenido al espacio de Cuidado de animales! ¿Que deseas hacer?")
+            print("1. Alimentar")
+            print("2. Acariciar")
+            print("3. Limpiar")
+            print("4. Enfermar")
+            print("5. Curar")
+            print("6. Ver inventario")
+            print("7. Ver Hora")
+            print("0. Salir")
+            opcion_animales = int(input(""))
+            if opcion_animales == 1:
+                Actualizar()
+                calendario.avanzar_tiempo(60)
+                calendario.mostrar_fecha_hora()
+                opcion_alimentar == 1
+
+                if  Mi_animal.comida== 0:
+                    print("Ya no tienes más comida para alimentar a los animales")
+                    print("Consigue más comida para los animales")
+                else:
+                    print(f'Tienes {Mi_animal.comida} porciones de comida')
+                    print("¿Que animal deseas alimentar? ")
+
+                    for i in range(0,Mi_animal.cantidad_animales):
+                        print(i, ". ", Mi_animal[i].nombre_informal)
+                    opcion_siembra = int(input(""))
+                    if listaSemillas[opcion_siembra].nombre_informal== "":
+                        print("No hay semillas aqui ")
+                    else:
+                        Sembrar(listaSemillas[opcion_siembra].nombre_backend,
+                                listaSemillas[opcion_siembra].nombre_informal
+                                , opcion_siembra, listaSemillas[opcion_siembra].nombre_madura)
+
+            elif opcion_cosechas == 2:
+                Actualizar()
+                calendario.avanzar_tiempo(60)
+                calendario.mostrar_fecha_hora()
+                decision = "S"
+                while decision == "S" or decision == "s":
+                    for i in range(0 , len(listaSuelos)):
+                        print("Suelo: ", listaSuelos[i].Get_Numero() ," , ", listaSuelos[i].semilla)
+                    opcion_suelo = int(input("Ingrese el numero del suelo que desea regar: "))
+                    calendario.avanzar_tiempo(60)
+                    calendario.mostrar_fecha_hora()
+                    if listaSuelos[opcion_suelo].tiene_semilla == False:
+                        print("No hay semillas en este suelo")
+                        decision = input("¿Desea regar otra semilla? (S/N): ")
+                    else:
+                        listaSemillas[listaSuelos[opcion_suelo].numero_semilla].tiene_agua = True
+                        listaSemillas[listaSuelos[opcion_suelo].numero_semilla].Mostrar_Datos()
+                        listaSemillas[listaSuelos[opcion_suelo].numero_semilla].dia_semilla = calendario.dia
+                        listaSuelos[opcion_suelo].dia_semilla = calendario.dia
+                        listaSuelos[opcion_suelo].tiene_agua = True
+                        decision = input("¿Desea regar otra semilla? (S/N): ")
+
+            elif opcion_cosechas == 3:
+                for i in range(0 , len(listaSuelos)):
+                    print("Suelo: ", listaSuelos[i].Get_Numero() ," , ", listaSuelos[i].hortaliza)
+                    if listaSuelos[i].tiene_semilla == True:
+                        if listaSemillas[listaSuelos[i].numero_semilla].es_madura == True:
+                            print("Madura")
+                        else:
+                            print("No madura")
+                    else:
+                        print("No hay semilla")
+                Cosechar()
+
+
+
+
+
+            elif opcion_cosechas == 4:
+                Actualizar()
+                calendario.avanzar_tiempo(60)
+                calendario.mostrar_fecha_hora()
+                print("Bienvenido al inventario")
+                inventario.Mostrar_Semillas()
+            elif opcion_cosechas == 5:
+                Actualizar()
+                calendario.avanzar_tiempo(60)
+                calendario.mostrar_fecha_hora()
+
+    elif opcion == 2:
+        Actualizar()
+        calendario.avanzar_tiempo(60)
+        calendario.mostrar_fecha_hora()
+        print("Bienvenido al espacio de cuidado de animales")
+    elif opcion==3:
+        Actualizar()
+        calendario.avanzar_tiempo(60)
+        calendario.mostrar_fecha_hora()
+        print("Bienvenido al espacio de economía y comercio")
+    elif opcion == 4:
+        Actualizar()
+        calendario.avanzar_tiempo(60)
+        calendario.mostrar_fecha_hora()
+        print("Bienvenido al inventario")
+        inventario.Mostrar_Semillas()
+    elif opcion == 5:
+        Actualizar()
+        calendario.avanzar_tiempo(60)
+        calendario.mostrar_fecha_hora()
+
+
+
 
 
 
