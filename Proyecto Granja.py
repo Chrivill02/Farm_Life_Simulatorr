@@ -338,17 +338,19 @@ def Sembrar(Nombre_Semilla, Nombre_Informal_Semilla, index_Semilla, hortaliza):
     print("¿En que suelo deseas sembrarlo? ")
     terreno.Verificar_Suelos_Disponibles()
     opcion_suelo = int(input("Ingrese el numero del suelo que deseas: "))
-    listaSuelos[opcion_suelo].tiene_semilla = True
-    listaSuelos[opcion_suelo].Agregar_Semilla(Nombre_Informal_Semilla)
-    listaSuelos[opcion_suelo].Agregar_Hortaliza(hortaliza)
-    listaSuelos[opcion_suelo].numero_semilla = index_Semilla
-    listaSemillas[index_Semilla].nombre_informal = ""
-    listaSemillas[index_Semilla].es_brote = True
-    listaSemillas[index_Semilla].dia_semilla = calendario.dia
-    inventario.Eliminar_Semilla(Nombre_Semilla)
-    terreno.Actualizar()
-
-    print(Nombre_Informal_Semilla, " sembrada en suelo ", listaSuelos[opcion_suelo].Get_Numero())
+    if listaSuelos[opcion_suelo].tiene_semilla == True:
+        print("Suelo ocupado")
+    else:
+        listaSuelos[opcion_suelo].tiene_semilla = True
+        listaSuelos[opcion_suelo].Agregar_Semilla(Nombre_Informal_Semilla)
+        listaSuelos[opcion_suelo].Agregar_Hortaliza(hortaliza)
+        listaSuelos[opcion_suelo].numero_semilla = index_Semilla
+        listaSemillas[index_Semilla].nombre_informal = ""
+        listaSemillas[index_Semilla].es_brote = True
+        listaSemillas[index_Semilla].dia_semilla = calendario.dia
+        inventario.Eliminar_Semilla(Nombre_Semilla)
+        terreno.Actualizar()
+        print(Nombre_Informal_Semilla, " sembrada en suelo ", listaSuelos[opcion_suelo].Get_Numero())
 
 
 def Actualizar():
@@ -363,23 +365,31 @@ def Actualizar():
 
 
 #Aca voy
-def Cosechar(hortaliza):
-    if hortaliza == "Manzana":
-        listaHortalizas.append(Manzana)
-        inventario.Agregar_Semilla("Semilla_Manzana", manzana.Dar_Semillas())
-    elif hortaliza == "Pera":
-        listaHortalizas.append(Pera)
-        inventario.Agregar_Semilla("Semilla_Pera", pera.Dar_Semillas())
-    elif hortaliza == "Uva":
-        listaHortalizas.append(Uva)
-        inventario.Agregar_Semilla("Semilla_Uva", uva.Dar_Semillas())
-    elif hortaliza == "Pimiento":
-        listaHortalizas.append(Pimiento)
-        inventario.Agregar_Semilla("Semilla_Pimiento", pimiento.Dar_Semillas())
-    elif hortaliza == "Tomate":
-        listaHortalizas.append(Tomate)
-        inventario.Agregar_Semilla("Semilla_Tomate", tomate.Dar_Semillas())
-    inventario.Agregar_Hortalizas(hortaliza)
+def Cosechar():
+
+    opcion_suelo = int(input("Ingrese el numero del suelo para cosechar su hortaliza: "))
+    if listaSuelos[opcion_suelo].tiene_semilla == False:
+        print("No hay semilla")
+    else:
+        hortaliza = listaSemillas[listaSuelos[opcion_suelo].numero_semilla].nombre_madura
+        if hortaliza == "Manzana":
+            listaHortalizas.append(Manzana)
+            inventario.Agregar_Semilla("Semilla_Manzana", manzana.Dar_Semillas())
+        elif hortaliza == "Pera":
+            listaHortalizas.append(Pera)
+            inventario.Agregar_Semilla("Semilla_Pera", pera.Dar_Semillas())
+        elif hortaliza == "Uva":
+            listaHortalizas.append(Uva)
+            inventario.Agregar_Semilla("Semilla_Uva", uva.Dar_Semillas())
+        elif hortaliza == "Pimiento":
+            listaHortalizas.append(Pimiento)
+            inventario.Agregar_Semilla("Semilla_Pimiento", pimiento.Dar_Semillas())
+        elif hortaliza == "Tomate":
+            listaHortalizas.append(Tomate)
+            inventario.Agregar_Semilla("Semilla_Tomate", tomate.Dar_Semillas())
+        inventario.Agregar_Hortalizas(hortaliza)
+        listaSuelos[opcion_suelo].tiene_semilla = False
+
     
 
 
@@ -457,8 +467,12 @@ while opcion != 0:
                     for i in range(0, len(listaSemillas)):
                         print(i, ". ", listaSemillas[i].nombre_informal)
                     opcion_siembra = int(input(""))
-                    Sembrar(listaSemillas[opcion_siembra].nombre_backend,listaSemillas[opcion_siembra].nombre_informal
-                            , opcion_siembra, listaSemillas[opcion_siembra].nombre_madura)
+                    if listaSemillas[opcion_siembra].nombre_informal== "":
+                        print("No hay semillas aqui ")
+                    else:
+                        Sembrar(listaSemillas[opcion_siembra].nombre_backend,
+                                listaSemillas[opcion_siembra].nombre_informal
+                                , opcion_siembra, listaSemillas[opcion_siembra].nombre_madura)
 
             elif opcion_cosechas == 2:
                 Actualizar()
@@ -469,8 +483,11 @@ while opcion != 0:
                     for i in range(0 , len(listaSuelos)):
                         print("Suelo: ", listaSuelos[i].Get_Numero() ," , ", listaSuelos[i].semilla)
                     opcion_suelo = int(input("Ingrese el numero del suelo que desea regar: "))
+                    calendario.avanzar_tiempo(60)
+                    calendario.mostrar_fecha_hora()
                     if listaSuelos[opcion_suelo].tiene_semilla == False:
                         print("No hay semillas en este suelo")
+                        decision = input("¿Desea regar otra semilla? (S/N): ")
                     else:
                         listaSemillas[listaSuelos[opcion_suelo].numero_semilla].tiene_agua = True
                         listaSemillas[listaSuelos[opcion_suelo].numero_semilla].Mostrar_Datos()
@@ -484,17 +501,15 @@ while opcion != 0:
                     print("Suelo: ", listaSuelos[i].Get_Numero() ," , ", listaSuelos[i].hortaliza)
                     if listaSuelos[i].tiene_semilla == True:
                         if listaSemillas[listaSuelos[i].numero_semilla].es_madura == True:
-                            print("Maduro(a)")
+                            print("Madura")
                         else:
-                            print("No maduro")
-
+                            print("No madura")
                     else:
                         print("No hay semilla")
-                opcion_suelo = int(input("Ingrese el numero del suelo para cosechar su hortaliza: "))
-                if listaSemillas[listaSuelos[opcion_suelo].numero_semilla].es_madura == True:
-                    Cosechar(listaSemillas[listaSuelos[opcion_suelo].numero_semilla].nombre_madura)
-                else:
-                    print("No hay una hortaliza madura en este suelo")
+                Cosechar()
+
+
+
 
 
             elif opcion_cosechas == 4:
