@@ -246,12 +246,17 @@ class Inventario:
         elif Hortaliza == "Tomate":
             self.tomates = self.tomates - 1
 
-    def Mostrar_Semillas(self):
+    def Mostrar(self):
         print(self.semillas_manzana, " Semillas de Manzana")
         print(self.semillas_pera, " Semillas de Pera")
         print(self.semillas_uva, " Semilas de Uva")
         print(self.semillas_tomate, " Semillas de Tomate")
         print(self.semillas_pimiento, " Semillas de Pimiento")
+        print(self.manzanas, " Manzanas")
+        print(self.peras, " Peras")
+        print(self.uvas, " Uvas")
+        print(self.tomates, " Tomates")
+        print(self.pimientos, " Pimientos")
 
 
 
@@ -370,25 +375,41 @@ def Cosechar():
     opcion_suelo = int(input("Ingrese el numero del suelo para cosechar su hortaliza: "))
     if listaSuelos[opcion_suelo].tiene_semilla == False:
         print("No hay semilla")
+    elif listaSemillas[listaSuelos[opcion_suelo].numero_semilla].es_madura == False:
+         print("Hortaliza no madura")
     else:
         hortaliza = listaSemillas[listaSuelos[opcion_suelo].numero_semilla].nombre_madura
         if hortaliza == "Manzana":
             listaHortalizas.append(Manzana)
             inventario.Agregar_Semilla("Semilla_Manzana", manzana.Dar_Semillas())
+            for i in range(0,manzana.Dar_Semillas()):
+                listaSemillas.append(Semilla_Manzana())
         elif hortaliza == "Pera":
             listaHortalizas.append(Pera)
             inventario.Agregar_Semilla("Semilla_Pera", pera.Dar_Semillas())
+            for i in range(0,pera.Dar_Semillas()):
+                listaSemillas.append(Semilla_Pera())
         elif hortaliza == "Uva":
             listaHortalizas.append(Uva)
             inventario.Agregar_Semilla("Semilla_Uva", uva.Dar_Semillas())
+            for i in range(0,uva.Dar_Semillas()):
+                listaSemillas.append(Semilla_Uva())
         elif hortaliza == "Pimiento":
             listaHortalizas.append(Pimiento)
             inventario.Agregar_Semilla("Semilla_Pimiento", pimiento.Dar_Semillas())
+            for i in range(0,pimiento.Dar_Semillas()):
+                listaSemillas.append(Semilla_Pimiento())
         elif hortaliza == "Tomate":
             listaHortalizas.append(Tomate)
             inventario.Agregar_Semilla("Semilla_Tomate", tomate.Dar_Semillas())
+            for i in range(0,tomate.Dar_Semillas()):
+                listaSemillas.append(Semilla_Tomate())
         inventario.Agregar_Hortalizas(hortaliza)
         listaSuelos[opcion_suelo].tiene_semilla = False
+        listaSuelos[opcion_suelo].hortaliza = "No hay hortaliza"
+        listaSemillas[listaSuelos[opcion_suelo].numero_semilla].es_madura = False
+
+
 
     
 
@@ -517,7 +538,7 @@ while opcion != 0:
                 calendario.avanzar_tiempo(60)
                 calendario.mostrar_fecha_hora()
                 print("Bienvenido al inventario")
-                inventario.Mostrar_Semillas()
+                inventario.Mostrar()
             elif opcion_cosechas == 5:
                 Actualizar()
                 calendario.avanzar_tiempo(60)
@@ -538,10 +559,14 @@ while opcion != 0:
         calendario.avanzar_tiempo(60)
         calendario.mostrar_fecha_hora()
         print("Bienvenido al inventario")
-        inventario.Mostrar_Semillas()
+        inventario.Mostrar()
     elif opcion == 5:
         Actualizar()
         calendario.avanzar_tiempo(60)
+        calendario.mostrar_fecha_hora()
+    elif opcion == 7:
+        Actualizar()
+        calendario.avanzar_tiempo(1440)
         calendario.mostrar_fecha_hora()
 
 
