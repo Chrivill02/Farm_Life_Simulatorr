@@ -23,14 +23,17 @@ class Animal:
         self.cantidad_animales=2
         self.enfermo=False
         self.cantidad_enfermos=0
-        self.comida=5
+        self.comida_disponible=5
 
     def MostrarDatos(self):
-        print(f'Datos:\nSalud: {self.salud}\nHambre: {self.hambre}\nFelicidad: {self.felicidad}\nRecursos: {self.produccion}\nCantidad de animales: {cantidad_animales}')
-    def AlimentarAnimal(self, cantidad):
-        self.hambre -= cantidad
-        self.felicidad += cantidad
-        self.comida -= cantidad
+        print(f'Datos:\nSalud: {self.salud}\nHambre: '
+              f'{self.hambre}\nFelicidad: {self.felicidad}\nRecursos: '
+              f'{self.produccion}\nCantidad de animales: {self.cantidad_animales}\nCantidad de '
+              f'animales enfermos: {self.cantidad_enfermos}')
+    def AlimentarAnimal(self, comida_en_uso):
+        self.hambre -= comida_en_uso
+        self.felicidad += comida_en_uso
+        self.comida_disponible -= comida_en_uso
 
     def Acariciar(self):
         self.felicidad +=10
@@ -40,17 +43,17 @@ class Animal:
 
     def Enfermar(self):
         if self.enfermo==True:
-        self.salud-=20*self.cantidad_enfemos
+            self.salud -= 20*self.cantidad_enfermos
 
     def Curar(self):
         self.salud +=30
 
     def AgregarComida(self, cantidad):
-        self.comida+=cantidad
+        self.comida_disponible += cantidad
 
 class Oveja(Animal):
-        def __init__(self, salud, hambre, felicidad, enfermo, comida, cantidad_enfermos, cantidad_animales):
-            super().__init__(salud, hambre, felicidad, enfermo,comida, cantidad_enfermos, cantidad_animales)
+        def __init__(self):
+            super().__init__()
             self.tipo = "oveja"
             self.lana=0
 
@@ -60,43 +63,43 @@ class Oveja(Animal):
             self.lana -=15
 
         def AgregarOveja(self, cantidad):
-            self.cantidad_animales+=cantidad
+            self.cantidad_animales += cantidad
 
         def EliminarOveja(self, cantidad):
             self.cantidad_animales -= cantidad
 
-        def MostrarCantidadVaca(self):
-            return self.cantidad_animales
+        def MostrarCantidadOveja(self):
+            print(self.cantidad_animales)
 
         def MostrarProduccion(self):
-            print(f'La producción de LANA es de: {self.lana}')
+            print(f'La producción actual disponible de LANA es de: {self.lana}')
 class Gallina(Animal):
-        def __init__(self, salud, hambre, felicidad, enfermo, comida, cantidad_enfermos, cantidad_animales):
-            super().__init__(salud, hambre, felicidad, enfermo, comida, cantidad_enfermos, cantidad_animales)
+        def __init__(self):
+            super().__init__()
             self.tipo = "gallina"
             self.huevos=0
 
         def ProducirHuevos(self):
-            self.huevos+=5
+            self.huevos+=3
 
         def VenderHuevos(self):
-            self.huevos-=5
+            self.huevos -= 3
 
         def AgregarGallina(self, cantidad):
-            self.cantidad_animales+=cantidad
+            self.cantidad_animales += cantidad
 
         def EliminarGallina(self, cantidad):
-            self.cantidad_animales-=cantidad
+            self.cantidad_animales -= cantidad
 
         def MostrarCantidadGallina(self):
-            return self.cantidad_animales
+            print(self.cantidad_animales)
         def MostrarProduccion(self):
-            print(f'La producción de HUEVOS es de: {self.huevos}')
+            print(f'La producción actual disponible de HUEVOS es de: {self.huevos}')
 class Vaca(Animal):
-        def __init__(self, salud, hambre, felicidad,  enfermo, comida, cantidad_enfermos, cantidad_animales):
-            super().__init__(salud, hambre, felicidad, enfermo, comida, cantidad_enfermos, cantidad_animales)
+        def __init__(self):
+            super().__init__()
             self.tipo = "vaca"
-            self.leche=0
+            self.leche = 0
 
         def ProducirLeche(self):
             self.leche += 15
@@ -105,34 +108,36 @@ class Vaca(Animal):
             self.leche -=15
 
         def AgregarVaca(self, cantidad):
-            self.cantidad_animales+=cantidad
+            self.cantidad_animales += cantidad
 
         def EliminarVaca(self, cantidad):
             self.cantidad_animales -= cantidad
 
         def MostrarCantidadVaca(self):
-            return self.cantidad_animales
+            print(self.cantidad_animales)
         def MostrarProduccion(self):
-            print(f'La producción de LECHE es de: {self.leche}')
+            print(f'La producción actual disponible de LECHE es de: {self.leche}')
 
 
 class Enfermos:
     def __init__(self):
         ListaEnfermos=[]
-        self.ListaEnfermos=ListaEnfermos.append(Animal.Enfermar())
+        self.ListaEnfermos = ListaEnfermos.append(Animal.Enfermar())
 
 class Granja(Oveja, Gallina, Vaca):
-    def __init__(self, tipo, salud, hambre, felicidad):
-        Oveja.__init__(self, tipo, salud, hambre, felicidad)
-        Gallina.__init__(self, tipo, salud, hambre, felicidad)
-        Vaca.__init__(self, tipo, salud, hambre, felicidad)
+    def __init__(self):
+        Oveja.__init__(self)
+        Gallina.__init__(self)
+        Vaca.__init__(self)
 
     def Mostrar_Granja_Animales(self):
         print(f'ANIMALES:\nVacas: {Vaca.MostrarCantidadVaca()}\nGallinas: {Gallina.MostrarCantidadGallina()}\nOvejas: {Oveja.MostrarCantidadOveja()}')
         print(f'RECURSOS:\nLeche: {self.leche}\nHuevos: {self.huevos}\nLana: {self.lana}')
 
 
-Mi_animal=Animal()
+Mi_oveja = Oveja()
+Mi_Vaca= Vaca()
+Mi_Gallina= Gallina()
 
 while opcion != 0:
     Actualizar()
