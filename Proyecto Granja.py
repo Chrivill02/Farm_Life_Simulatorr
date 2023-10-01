@@ -219,21 +219,7 @@ Mi_Vaca= Vaca()
 Mi_Gallina= Gallina()
 
 
-while opcion != 0:
-    Actualizar()
-    calendario.avanzar_tiempo(60)
-    calendario.mostrar_fecha_hora()
-      # Avanza el tiempo en minutos (ajusta según tus necesidades)while opcion != 0:
-    print("Bienvenido a Farm Simulator! ")
-    print("Selecciona la opción que deseas: ")
-    print("1. Cultivos y cosechas")
-    print("2. Cuidado de animales")
-    print("3. Economía y comercio")
-    print("4. Ver inventario")
-    print("0. Salir")
-    opcion = int(input())
-
-    if opcion == 2:
+    elif opcion == 2:
         Actualizar()
         calendario.avanzar_tiempo(60)
         calendario.mostrar_fecha_hora()
