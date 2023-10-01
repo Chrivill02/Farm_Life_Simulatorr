@@ -400,41 +400,6 @@ class Suelo:
 # Esto es como una actualizacion del tiempo
 
 
-# def actualizarTiempo():
-# Borrar
-class Calendario:
-    def __init__(self, hora_inicial=6, minutos_iniciales=0, dia_inicial=1, estacion_inicial="Primavera"):
-        self.hora = hora_inicial
-        self.minutos = minutos_iniciales
-        self.dia = dia_inicial
-        self.estacion = estacion_inicial
-
-    def avanzar_tiempo(self, minutos):
-        self.minutos += minutos
-        while self.minutos >= 60:
-            self.minutos -= 60
-            self.hora += 1
-            if self.hora >= 24:
-                self.hora = 0
-                self.dia += 1
-                if self.dia > 30:  # Puedes ajustar esto según el número de días en tu juego
-                    self.dia = 1
-                    self.cambiar_estacion()
-                    if self.mes >= 12:
-                        self.mes = 0
-
-    def cambiar_estacion(self):
-        estaciones = ["Primavera", "Verano", "Otoño", "Invierno"]  # Personaliza según las estaciones de tu juego
-        estacion_actual = estaciones.index(self.estacion)
-        self.estacion = estaciones[(estacion_actual + 1) % len(estaciones)]
-
-    def mostrar_fecha_hora(self):
-        print(f"Día {self.dia} de {self.estacion}, {self.hora:02d}:{self.minutos:02d}")
-
-    def Tiempo_En_Formato(self):
-        return (f" {self.dia:02d}:{self.hora:02d}:{self.minutos:02d}")
-
-
 def Sembrar(Nombre_Semilla, Nombre_Informal_Semilla, index_Semilla, hortaliza):
     print("¿En que suelo deseas sembrarlo? ")
     terreno.Verificar_Suelos_Disponibles()
@@ -453,18 +418,6 @@ def Sembrar(Nombre_Semilla, Nombre_Informal_Semilla, index_Semilla, hortaliza):
         terreno.Actualizar()
         print(Nombre_Informal_Semilla, " sembrada en suelo ", listaSuelos[opcion_suelo].Get_Numero())
 
-
-"""""
-def Actualizar_Estado_Semilla():
-    for i in range(0, len(listaSuelos)):
-        if listaSemillas[listaSuelos[i].numero_semilla].dia_semilla + 1 == calendario.dia and listaSemillas[
-            listaSuelos[i].numero_semilla].es_crecimiento == False:
-            listaSemillas[listaSuelos[i].numero_semilla].Crecer()
-        elif listaSemillas[listaSuelos[i].numero_semilla].dia_semilla + 2 == calendario.dia and listaSemillas[
-            listaSuelos[i].numero_semilla].es_madura == False:
-            listaSemillas[listaSuelos[i].numero_semilla].Madurar()
-
-"""
 
 
 # Aca voy
