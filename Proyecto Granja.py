@@ -348,7 +348,7 @@ while opcion != 0:
                 elif opcion_agregar == 2:
                     Mi_granja.AgregarAnimal(Mi_Vaca)
                 elif opcion_agregar == 3:
-                    Mi_granja.AgregarAnimal(Mi_Gallinax)
+                    Mi_granja.AgregarAnimal(Mi_Gallina)
 
 
 
