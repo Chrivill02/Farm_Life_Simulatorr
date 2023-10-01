@@ -796,6 +796,24 @@ listaSuelos.append(Suelo(False, 3))
 listaSuelos.append(Suelo(False, 4))
 terreno = Terreno(5, 1, 1000)
 
+
+Jugador1 = Jugador("Rodrigo")
+Manzanas = Producto("Manzana", 15, 5)
+Pera = Producto("Pera", 10, 5)
+Uva = Producto("Uva", 20, 5)
+Pimiento = Producto("Pimiento", 5, 5)
+Tomate = Producto("Tomate", 5, 5)
+
+Semilla_Manzanas = Producto("Semilla de Manzanas", 15, 5)
+Semilla_Pera = Producto("Semilla de Pera", 10, 5)
+Semilla_Uva = Producto("Semilla de Uva", 20, 5)
+Semilla_Pimiento = Producto("Semilla de Pimiento", 5, 5)
+Semilla_Tomate = Producto("Semilla de Tomate", 5, 5)
+
+Fertilizante = Producto("Fertilizante", 5, 5)
+Insecticida = Producto("Insecticida", 5, 5)
+Medicamento = Producto("Medicamento", 5, 5)
+
 while opcion != 0:
 
     calendario.avanzar_tiempo(60)
@@ -1222,22 +1240,6 @@ while opcion != 0:
         calendario.avanzar_tiempo(1440)
         calendario.mostrar_fecha_hora()
 
-Jugador1 = Jugador("Rodrigo")
-Manzanas = Producto("Manzana", 15, 5)
-Pera = Producto("Pera", 10, 5)
-Uva = Producto("Uva", 20, 5)
-Pimiento = Producto("Pimiento", 5, 5)
-Tomate = Producto("Tomate", 5, 5)
-
-Semilla_Manzanas = Producto("Semilla de Manzanas", 15, 5)
-Semilla_Pera = Producto("Semilla de Pera", 10, 5)
-Semilla_Uva = Producto("Semilla de Uva", 20, 5)
-Semilla_Pimiento = Producto("Semilla de Pimiento", 5, 5)
-Semilla_Tomate = Producto("Semilla de Tomate", 5, 5)
-
-Fertilizante = Producto("Fertilizante", 5, 5)
-Insecticida = Producto("Insecticida", 5, 5)
-Medicamento = Producto("Medicamento", 5, 5)
 
 
 
