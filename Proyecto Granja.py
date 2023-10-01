@@ -115,7 +115,7 @@ class Animal:
     def MostrarDatos(self):
         print(f'Datos:\nSalud: {self.salud}\nHambre: '
               f'{self.hambre}\nFelicidad: {self.felicidad}\nRecursos: '
-              f'{self.produccion}\nCantidad de animales: {self.cantidad_animales}\nCantidad de '
+              f'Cantidad de animales: {self.cantidad_animales}\nCantidad de '
               f'animales enfermos: {self.cantidad_enfermos}')
     def AlimentarAnimal(self, comida_a_utilizar):
         self.hambre -= comida_a_utilizar
