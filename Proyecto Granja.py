@@ -1,4 +1,4 @@
-
+#Espacio Angie
 import os
 
 def clear():
@@ -7,6 +7,7 @@ def clear():
 import time
 
 class Calendario:
+
     def __init__(self, hora_inicial=6, minutos_iniciales=0, dia_inicial=1, estacion_inicial="Primavera"):
         self.hora = hora_inicial
         self.minutos = minutos_iniciales
@@ -33,14 +34,11 @@ class Calendario:
     def mostrar_fecha_hora(self):
         print(f"Día {self.dia} de {self.estacion}, {self.hora:02d}:{self.minutos:02d}")
 
+
+
+
 calendario = Calendario()
-
-while True:
-    calendario.mostrar_fecha_hora()
-    time.sleep(1)
-    calendario.avanzar_tiempo(10)  
-
-
+#Espacio de rodrigo
 def pause():
     os.system('pause')
 
@@ -772,7 +770,6 @@ def Regar():
 
 
 # Uso de ejemplo
-calendario = Calendario()
 
 opcion = 1
 listaSemillas = []
@@ -809,7 +806,6 @@ Semilla_Pera = Producto("Semilla de Pera", 10, 5)
 Semilla_Uva = Producto("Semilla de Uva", 20, 5)
 Semilla_Pimiento = Producto("Semilla de Pimiento", 5, 5)
 Semilla_Tomate = Producto("Semilla de Tomate", 5, 5)
-
 Fertilizante = Producto("Fertilizante", 5, 5)
 Insecticida = Producto("Insecticida", 5, 5)
 Medicamento = Producto("Medicamento", 5, 5)
@@ -825,6 +821,8 @@ while opcion != 0:
     print("2. Cuidado de animales")
     print("3. Economía y comercio")
     print("4. Ver inventario")
+    print("5. Ver Hora")
+    print("6. Mercado")
     print("0. Salir")
     opcion = int(input(""))
     if opcion == 1:
@@ -840,7 +838,6 @@ while opcion != 0:
             print("3. Cosechar")
             print("4. Ver inventario")
             print("5. Ver Hora")
-            print("6. Mercado")
             print("0. Salir")
             opcion_cosechas = int(input(""))
             if opcion_cosechas == 1:
@@ -912,14 +909,12 @@ while opcion != 0:
                 calendario.mostrar_fecha_hora()
 
     elif opcion == 2:
-      
-      Actualizar()
+
       calendario.avanzar_tiempo(60)
       calendario.mostrar_fecha_hora()
 
       opcion_animales = int(input()) #opción para elegir la acción (alimentar, acariciar, limpiar, etc.)
       while opcion_animales != 0:
-          Actualizar()
           calendario.avanzar_tiempo(60)
           calendario.mostrar_fecha_hora()
           print("¡Bienvenido al espacio de Cuidado de animales! ¿Que deseas hacer?")
@@ -932,7 +927,6 @@ while opcion != 0:
           print("7. Agregar animal a mi granja")
           print("0. Salir")
           if opcion_animales == 1:
-              Actualizar()
               calendario.avanzar_tiempo(60)
               calendario.mostrar_fecha_hora()
               opcion_alimentar=1 #opción para elegir que animal alimentar
@@ -948,7 +942,6 @@ while opcion != 0:
                   Mi_Gallina.AlimentarAnimal(1)
 
           elif opcion_animales == 2:
-              Actualizar()
               calendario.avanzar_tiempo(60)
               calendario.mostrar_fecha_hora()
               opcion_acariciar=int(input()) #opcion para elegir que animal acariciar
@@ -962,7 +955,6 @@ while opcion != 0:
                   Mi_Gallina.Acariciar()
 
           elif opcion_animales==3:
-              Actualizar()
               calendario.avanzar_tiempo(60)
               calendario.mostrar_fecha_hora()
               opcion_limpiar = int(input()) #opcion para elegir que animal limpiar
@@ -979,7 +971,6 @@ while opcion != 0:
 
 
           elif opcion_animales==4:
-              Actualizar()
               calendario.avanzar_tiempo(60)
               calendario.mostrar_fecha_hora()
               opcion_enfermar=int(input()) #opcion para elegir ver que tipo de animal está enfermo
@@ -996,7 +987,6 @@ while opcion != 0:
                   Mi_Gallina.MostrarEnfermos()
 
           elif opcion_animales==5:
-              Actualizar()
               calendario.avanzar_tiempo(60)
               calendario.mostrar_fecha_hora()
               opcion_curar= int(input()) #opcion para elegir que animal curar
@@ -1010,13 +1000,11 @@ while opcion != 0:
                   Mi_Gallina.Curar()
 
           elif opcion_animales==6:
-              Actualizar()
               calendario.avanzar_tiempo(60)
               calendario.mostrar_fecha_hora()
               Mi_granja.Mostrar_Granja_Animales()
 
           elif opcion_animales==7:
-              Actualizar()
               calendario.avanzar_tiempo(60)
               calendario.mostrar_fecha_hora()
               print("¿Que animal deseas curar? ")
