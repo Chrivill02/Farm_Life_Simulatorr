@@ -4,7 +4,7 @@ import os
 def clear():
     os.system('cls')
 
-import time
+
 
 class Calendario:
 
@@ -47,12 +47,13 @@ def pause():
 
 # Espacio para Rodrigo (Economía y mercado)
 class Jugador:
-    def _init_(self, nombre):
+    def __init__(self, nombre):
         self.nombre = nombre
         self.dinero = 200
-        self.productos = {"Manzana": 0, "Pera": 0, "Uva": 0, "Pimiento": 0, "Tomate": 0,"Semilla de Manzanas": 0,
-                        "Semilla de Pera": 0, "Semilla de Uva": 0, "Semilla de Pimiento": 0, "Semilla de Tomate": 0,
-                        "Fertilizante": 0, "Insecticida": 0, "Medicamento": 0}
+        self.productos = {"Manzana": 0, "Pera": 0, "Uva": 0, "Pimiento": 0, "Tomate": 0, "Semilla de Manzanas": 0,
+                          "Semilla de Pera": 0, "Semilla de Uva": 0, "Semilla de Pimiento": 0, "Semilla de Tomate": 0,
+                          "Fertilizante": 0, "Insecticida": 0, "Medicamento": 0}
+
     def agregar_dinero(self, cantidad):
         self.dinero += cantidad
 
@@ -87,7 +88,7 @@ class Jugador:
 
 
 class Producto:
-    def _init_(self, nombre, cantidad, precio):
+    def __init__(self, nombre, cantidad, precio):
         self.nombre = nombre
         self.cantidad = cantidad
         self.precio = precio
@@ -109,6 +110,7 @@ class Animal:
         self.enfermo=False
         self.cantidad_enfermos=0
         self.comida_disponible=5
+        self.produccion = 0
 
     def MostrarDatos(self):
         print(f'Datos:\nSalud: {self.salud}\nHambre: '
@@ -565,6 +567,11 @@ class Terreno:
                 continue
         self.espacio_siembra = contador_espacios
 
+    def Mejorar_Nivel(self):
+        self.nivel = 2
+        self.espacio_siembra += 2
+        print("Ha mejorado el terreno exitosamente, ahora tiene: ", self.espacio_siembra, " espacios para sembrar!")
+
 
 class Inventario:
     def __init__(self, semillas_manzana, semillas_pera, semillas_uva, semillas_pimiento, semillas_tomate,
@@ -791,7 +798,7 @@ listaSuelos.append(Suelo(False, 1))
 listaSuelos.append(Suelo(False, 2))
 listaSuelos.append(Suelo(False, 3))
 listaSuelos.append(Suelo(False, 4))
-terreno = Terreno(5, 1, 1000)
+terreno = Terreno(5, 1, 100)
 
 
 Jugador1 = Jugador("Rodrigo")
@@ -912,8 +919,7 @@ while opcion != 0:
 
       calendario.avanzar_tiempo(60)
       calendario.mostrar_fecha_hora()
-
-      opcion_animales = int(input()) #opción para elegir la acción (alimentar, acariciar, limpiar, etc.)
+      opcion_animales = 1
       while opcion_animales != 0:
           calendario.avanzar_tiempo(60)
           calendario.mostrar_fecha_hora()
@@ -926,12 +932,13 @@ while opcion != 0:
           print("6. Ver inventario de animales")
           print("7. Agregar animal a mi granja")
           print("0. Salir")
+          opcion_animales = int(input())
           if opcion_animales == 1:
               calendario.avanzar_tiempo(60)
               calendario.mostrar_fecha_hora()
-              opcion_alimentar=1 #opción para elegir que animal alimentar
               print("¿Que animal deseas alimentar? ")
               print("1.Ovejas\n2.Vacas\n3.Gallinas")
+              opcion_alimentar = int(input()) #opción para elegir que animal alimentar
               if opcion_alimentar==1:
                   Mi_Oveja.AlimentarAnimal(1)
 
@@ -1024,6 +1031,7 @@ while opcion != 0:
         calendario.avanzar_tiempo(60)
         calendario.mostrar_fecha_hora()
         print("Bienvenido al espacio de economía y comercio")
+
     elif opcion == 4:
      
 
@@ -1070,7 +1078,7 @@ while opcion != 0:
                     cantidad = int(input("Ingrese cuantas semillas de manzana quiere comprar: "))
                     Jugador1.comprar(Semilla_Manzanas, cantidad)
                     print(f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
-                    pause()
+
                 elif opcion == 2:
                     print(f"Semillas de Pera: Precio:{Semilla_Pera.precio}  Stock: {Semilla_Pera.cantidad}")
                     cantidad = int(input("Ingrese cuantas semillas de pera quiere comprar: "))
@@ -1171,9 +1179,15 @@ while opcion != 0:
                     print(f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
                     pause()
                 elif opcion == 4:
-                    print(f"Terreno: Precio:{Terreno.precio}  Stock: {Terreno.cantidad}")
-                    cantidad = int(input("Ingrese cuantos Terrenos quiere comprar: "))
-                    Jugador1.comprar(Terreno, cantidad)
+                    print(f"Terreno: Precio:{terreno.precio} ")
+                    decision = int(input("¿Desea mejorar el terreno? (S/N)"))
+                    if decision == "S" or decision == "s":
+                        if Jugador1.dinero >= terreno.precio:
+                            Jugador1.dinero -= terreno.precio
+                            terreno.Mejorar_Nivel()
+
+                    else:
+                        pause()
                     # Mejora de terreno aquis
                     print(f"Terreno Mejorado con éxito")
                     print(f"Jugador: {Jugador1.nombre} Dinero Restante: {Jugador1.dinero}")
