@@ -826,10 +826,9 @@ while opcion != 0:
     print("Selecciona la opción que deseas: ")
     print("1. Cultivos y cosechas")
     print("2. Cuidado de animales")
-    print("3. Economía y comercio")
+    print("3. Mercado")
     print("4. Ver inventario")
     print("5. Ver Hora")
-    print("6. Mercado")
     print("0. Salir")
     opcion = int(input(""))
     if opcion == 1:
@@ -1027,27 +1026,10 @@ while opcion != 0:
       calendario.mostrar_fecha_hora()
       print("Bienvenido al espacio de cuidado de animales")
     elif opcion == 3:
-
-        calendario.avanzar_tiempo(60)
-        calendario.mostrar_fecha_hora()
-        print("Bienvenido al espacio de economía y comercio")
-
-    elif opcion == 4:
-     
-
-        calendario.avanzar_tiempo(60)
-        calendario.mostrar_fecha_hora()
-        print("Bienvenido al inventario")
-        inventario.Mostrar()
-    elif opcion == 5:
-
-        calendario.avanzar_tiempo(60)
-        calendario.mostrar_fecha_hora()
-    elif opcion == 6:
         clear()
         print(f"Bienvenido al mercado {Jugador1.nombre}")
         print("Productos: ")
-        i=0
+        i = 0
         for nombre_producto, cantidad in Jugador1.productos.items():
             i += 1
             print(f"{i}. {nombre_producto}: {cantidad}")
@@ -1077,31 +1059,36 @@ while opcion != 0:
                     print(f"Semillas de Manzanas: Precio:{Semilla_Manzanas.precio}  Stock: {Semilla_Manzanas.cantidad}")
                     cantidad = int(input("Ingrese cuantas semillas de manzana quiere comprar: "))
                     Jugador1.comprar(Semilla_Manzanas, cantidad)
-                    print(f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
+                    print(
+                        f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
 
                 elif opcion == 2:
                     print(f"Semillas de Pera: Precio:{Semilla_Pera.precio}  Stock: {Semilla_Pera.cantidad}")
                     cantidad = int(input("Ingrese cuantas semillas de pera quiere comprar: "))
                     Jugador1.comprar(Semilla_Pera, cantidad)
-                    print(f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
+                    print(
+                        f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
                     pause()
                 elif opcion == 3:
                     print(f"Semillas de Uva: Precio:{Semilla_Uva.precio}  Stock: {Semilla_Uva.cantidad}")
                     cantidad = int(input("Ingrese cuantas semillas de Uva quiere comprar: "))
                     Jugador1.comprar(Semilla_Uva, cantidad)
-                    print(f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
+                    print(
+                        f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
                     pause()
                 elif opcion == 4:
                     print(f"Semillas de Pimiento: Precio:{Semilla_Pimiento.precio}  Stock: {Semilla_Pimiento.cantidad}")
                     cantidad = int(input("Ingrese cuantos semillas de Pimiento quiere comprar: "))
                     Jugador1.comprar(Semilla_Pimiento, cantidad)
-                    print(f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
+                    print(
+                        f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
                     pause()
                 elif opcion == 5:
                     print(f"Semillas de Tomate: Precio:{Semilla_Tomate.precio}  Stock: {Semilla_Tomate.cantidad}")
                     cantidad = int(input("Ingrese cuantos semillas de Tomate quiere comprar: "))
                     Jugador1.comprar(Semilla_Tomate, cantidad)
-                    print(f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
+                    print(
+                        f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
                     pause()
                 elif opcion == 6:
                     pass
@@ -1121,31 +1108,36 @@ while opcion != 0:
                     print(f"Manzanas: Precio:{Manzanas.precio}  Stock: {Manzanas.cantidad}")
                     cantidad = int(input("Ingrese cuantas manzanas quiere comprar: "))
                     Jugador1.comprar(Manzanas, cantidad)
-                    print(f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
+                    print(
+                        f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
                     pause()
                 elif opcion == 2:
                     print(f"Pera: Precio:{Pera.precio}  Stock: {Pera.cantidad}")
                     cantidad = int(input("Ingrese cuantas peras quiere comprar: "))
                     Jugador1.comprar(Pera, cantidad)
-                    print(f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
+                    print(
+                        f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
                     pause()
                 elif opcion == 3:
                     print(f"Uva: Precio:{Uva.precio}  Stock: {Uva.cantidad}")
                     cantidad = int(input("Ingrese cuantas Uvas quiere comprar: "))
                     Jugador1.comprar(Uva, cantidad)
-                    print(f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
+                    print(
+                        f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
                     pause()
                 elif opcion == 4:
                     print(f"Pimiento: Precio:{Pimiento.precio}  Stock: {Pimiento.cantidad}")
                     cantidad = int(input("Ingrese cuantos Pimientos quiere comprar: "))
                     Jugador1.comprar(Pimiento, cantidad)
-                    print(f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
+                    print(
+                        f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
                     pause()
                 elif opcion == 5:
                     print(f"Tomate: Precio:{Tomate.precio}  Stock: {Tomate.cantidad}")
                     cantidad = int(input("Ingrese cuantos Tosmate quiere comprar: "))
                     Jugador1.comprar(Tomate, cantidad)
-                    print(f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
+                    print(
+                        f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
                     pause()
                 elif opcion == 6:
                     pass
@@ -1164,19 +1156,22 @@ while opcion != 0:
                     print(f"Fertilizante: Precio:{Fertilizante.precio}  Stock: {Fertilizante.cantidad}")
                     cantidad = int(input("Ingrese cuanto Fertilizante quiere comprar: "))
                     Jugador1.comprar(Fertilizante, cantidad)
-                    print(f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
+                    print(
+                        f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
                     pause()
                 elif opcion == 2:
                     print(f"Medicamentos: Precio:{Medicamento.precio}  Stock: {Medicamento.cantidad}")
                     cantidad = int(input("Ingrese cuanto Medicamento quiere comprar: "))
                     Jugador1.comprar(Medicamento, cantidad)
-                    print(f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
+                    print(
+                        f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
                     pause()
                 elif opcion == 3:
                     print(f"Insecticida: Precio:{Insecticida.precio}  Stock: {Insecticida.cantidad}")
                     cantidad = int(input("Ingrese cuanto Insecticida quiere comprar: "))
                     Jugador1.comprar(Insecticida, cantidad)
-                    print(f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
+                    print(
+                        f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
                     pause()
                 elif opcion == 4:
                     print(f"Terreno: Precio:{terreno.precio} ")
@@ -1212,30 +1207,53 @@ while opcion != 0:
             if opcion == 1:
                 cantidad = int(input("Cuantas Manzanass quiere vender?"))
                 Jugador1.vender(Manzanas, cantidad)
-                print(f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
+                print(
+                    f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
                 pause()
             elif opcion == 2:
                 cantidad = int(input("Cuantas Peras quiere vender?"))
                 Jugador1.vender(Pera, cantidad)
-                print(f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
+                print(
+                    f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
                 pause()
             elif opcion == 3:
                 cantidad = int(input("Cuantas Uvas quiere vender?"))
                 Jugador1.vender(Uva, cantidad)
-                print(f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
+                print(
+                    f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
                 pause()
             elif opcion == 4:
                 cantidad = int(input("Cuantas Pimientos quiere vender?"))
                 Jugador1.vender(Pimiento, cantidad)
-                print(f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
+                print(
+                    f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
                 pause()
             elif opcion == 5:
                 cantidad = int(input("Cuantos Tomates quiere vender?"))
                 Jugador1.vender(Tomate, cantidad)
-                print(f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
+                print(
+                    f"Jugador: {Jugador1.nombre}   Productos: {Jugador1.productos}  Dinero Restante: {Jugador1.dinero}")
                 pause()
             else:
                 continue
+
+        calendario.avanzar_tiempo(60)
+        calendario.mostrar_fecha_hora()
+        print("Bienvenido al espacio de economía y comercio")
+
+    elif opcion == 4:
+     
+
+        calendario.avanzar_tiempo(60)
+        calendario.mostrar_fecha_hora()
+        print("Bienvenido al inventario")
+        inventario.Mostrar()
+    elif opcion == 5:
+
+        calendario.avanzar_tiempo(60)
+        calendario.mostrar_fecha_hora()
+    elif opcion == 6:
+        print("")
   
     elif opcion == 7:
 
