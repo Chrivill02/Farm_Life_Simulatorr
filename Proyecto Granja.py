@@ -116,11 +116,11 @@ class Animal:
         self.enfermo=False
         self.cantidad_enfermos=0
         self.comida_disponible=5
-        self.produccion = 0
+
 
     def MostrarDatos(self):
         print(f'Datos:\nSalud: {self.salud}\nHambre: '
-              f'{self.hambre}\nFelicidad: {self.felicidad}\nRecursos: '
+              f'{self.hambre}\nFelicidad: {self.felicidad} '
               f'Cantidad de animales: {self.cantidad_animales}\nCantidad de '
               f'animales enfermos: {self.cantidad_enfermos}')
     def AlimentarAnimal(self, comida_a_utilizar):
