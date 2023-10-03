@@ -123,16 +123,6 @@ class Animal:
               f'{self.hambre}\nFelicidad: {self.felicidad} '
               f'Cantidad de animales: {self.cantidad_animales}\nCantidad de '
               f'animales enfermos: {self.cantidad_enfermos}')
-    def AlimentarAnimal(self, comida_a_utilizar):
-        self.hambre -= comida_a_utilizar
-        self.felicidad += comida_a_utilizar
-        self.comida_disponible -= comida_a_utilizar
-        if comida_a_utilizar==1:
-            print(f"Acabas de utilizar {comida_a_utilizar} porción de comida para alimentar a tus animales")
-        elif comida_a_utilizar==0:
-            print("No cuentas con porciones de comida disponibles para alimentar a tus animales")
-        else:
-            print(f"Acabas de utilizar {comida_a_utilizar} porciones de comida para alimentar a tus animales")
 
     def Acariciar(self):
         self.felicidad +=10
@@ -153,13 +143,6 @@ class Animal:
     def Curar(self):
         self.salud +=30
         print('Animal curado exitosamente')
-
-    def AgregarComida(self, cantidad):
-        self.comida_disponible += cantidad
-        if cantidad==1:
-            print(f'Se ha agregado {cantidad} porción de comida para tus animales')
-        else:
-            print(f'Se han agregado {cantidad} porciones de comida para tus animales')
 
 
 class Oveja(Animal):
@@ -202,6 +185,14 @@ class Oveja(Animal):
 
         def MostrarProduccion(self):
             print(f'La producción actual disponible de LANA es de: {self.lana}')
+
+        def AlimentarAnimal (self):
+            self.hambre -= inventario.manzanas-3
+            self.felicidad += 3
+            if inventario.manzanas < 4 :
+                print("No cuentas con manzanas disponibles para alimentar a tus ovejas")
+            else:
+                print(f"Acabas de alimentar con 3 manzanas a tu oveja")
 class Gallina(Animal):
         def __init__(self):
             super().__init__()
@@ -220,6 +211,14 @@ class Gallina(Animal):
             elif self.huevos > 2:
                 self.huevos -= 3
                 print("Vendiste 3 huevos")
+
+        def AlimentarAnimal (self):
+            self.hambre -= inventario.peras-3
+            self.felicidad += 3
+            if inventario.peras < 4 :
+                print("No cuentas con peras disponibles para alimentar a tus gallinas")
+            else:
+                print(f"Acabas de alimentar con 3 peras a tu gallina")
 
         def AgregarGallina(self, cantidad):
             self.cantidad_animales += cantidad
@@ -261,6 +260,14 @@ class Vaca(Animal):
             elif self.leche > 14:
                 self.leche -= 15
                 print("Vendiste 15 litros de leche")
+
+        def AlimentarAnimal (self):
+            self.hambre -= inventario.uvas-3
+            self.felicidad += 3
+            if inventario.uvas < 4 :
+                print("No cuentas con uvas disponibles para alimentar a tus vacas")
+            else:
+                print(f"Acabas de alimentar con 3 uvas a tu vaca")
 
         def AgregarVaca(self, cantidad):
             self.cantidad_animales += cantidad
@@ -1000,13 +1007,13 @@ while opcion != 0:
               print("1.Ovejas\n2.Vacas\n3.Gallinas")
               opcion_alimentar = int(input()) #opción para elegir que animal alimentar
               if opcion_alimentar==1:
-                  Mi_Oveja.AlimentarAnimal(1)
+                  Mi_Oveja.AlimentarAnimal()
 
               elif opcion_alimentar == 2:
-                  Mi_Vaca.AlimentarAnimal(1)
+                  Mi_Vaca.AlimentarAnimal()
 
               elif opcion_alimentar == 3:
-                  Mi_Gallina.AlimentarAnimal(1)
+                  Mi_Gallina.AlimentarAnimal()
 
           elif opcion_animales == 2:
               calendario.avanzar_tiempo(60)
